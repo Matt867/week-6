@@ -16,4 +16,19 @@ app.use(express.urlencoded({ extended: false }));
 //
 // - Otherwise, send an Unauthorized status in reponse.
 
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if (!username | !password) {
+        res.sendStatus(400);
+    } else {
+        if (username === 'alice' && password === 's3cr3t') {
+            res.redirect('/');
+        } else{
+            res.sendStatus(401)
+        }
+    }
+})
+
 module.exports = app;
